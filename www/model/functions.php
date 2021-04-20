@@ -224,12 +224,3 @@ function is_valid_csrf_token($token){
   // get_session()はユーザ定義関数
   return $token === get_session('csrf_token');
 }
-/**
-* HTTPヘッダにX-FRAME-OPTIONSを設定
-* @param void
-* @return void
-*/
-function is_x_frame_options(){
-  /* フレーム内のページ表示を全ドメインで禁止したい場合 */
-  header('X-Frame-Options: DENY');
-}

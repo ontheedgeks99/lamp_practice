@@ -43,7 +43,7 @@ function is_valid_csrf_token($token){
         <!-- ウィンドウの中に独立して表示される形式のインラインフレームを作成 -->
         <iframe
             id="csrf"
-            src="index.php">
+            src="cart.php">
         </iframe>
         <script>
             setTimeout(function(){

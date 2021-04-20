@@ -7,9 +7,6 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 // itemデータに関する関数ファイルを読み込み
 require_once MODEL_PATH . 'item.php';
-
-//HTTPヘッダにX-FRAME-OPTIONSを設定
-is_x_frame_options();
 // ログインチェックを行うため、sessionを開始する
 session_start();
 // ログインチェック関数を呼び出し
