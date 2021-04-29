@@ -32,7 +32,7 @@ function get_item($db, $item_id){
  * @param bool $is_open status情報
  * @return array|bool 結果配列|false
  */
-function get_items($db, $is_open = false, $sort = 0){
+function get_items($db, $is_open = false, $sort = 0,$this_page_first_result = '',$results_per_page = ''){
   //trueの場合、結合代入演算子'.='で条件を追加
   $sql = '
     SELECT
@@ -48,22 +48,25 @@ function get_items($db, $is_open = false, $sort = 0){
   ';
   if($is_open === true){
     $sql .= '
-      WHERE status = 1
+    WHERE status = 1
     ';
   }
   if((int)$sort === 0){
     $sql .= '
-      ORDER BY created desc
+    ORDER BY created desc
     ';
   } else if ((int)$sort === 1) {
     $sql .= '
-      ORDER BY price
+    ORDER BY price
     ';
   } else {
     $sql .= '
-      ORDER BY price desc
+    ORDER BY price desc
     ';
   }
+  $sql .= "
+      LIMIT $this_page_first_result,$results_per_page
+    ";
 
   return fetch_all_query($db, $sql);
 }
@@ -76,8 +79,8 @@ function get_all_items($db){
  * @param obj $db dbハンドル
  * @return array|bool 結果配列|false
  */
-function get_open_items($db, $sort){
-  return get_items($db, true, $sort);
+function get_open_items($db, $sort,$this_page_first_result,$results_per_page){
+  return get_items($db, true, $sort,$this_page_first_result,$results_per_page);
 }
 
 function regist_item($db, $name, $price, $stock, $status, $image){
@@ -266,4 +269,23 @@ function is_valid_item_status($status){
     $is_valid = false;
   }
   return $is_valid;
+}
+
+/**
+ * クエリを実行し、item情報を全取得
+ * @param obj $db dbハンドル
+ * @param bool $is_open status情報
+ * @return array|bool 結果配列|false
+ */
+function get_items_count($db){
+  $sql = '
+    SELECT
+      count(*) AS count
+    FROM
+      items
+    WHERE
+      status = 1
+    ';
+
+  return fetch_all_query($db, $sql);
 }

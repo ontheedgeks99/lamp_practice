@@ -65,6 +65,11 @@
         </div>
       <?php } ?>
       </div>
+      <?php
+      for ($page=1;$page<=$number_f_pages;$page++) : ?>
+      <a href="index.php?page=<?php echo h($page); ?> "><?php echo h($page); ?></a>
+      <?php endfor; ?>
+      
     </div>
   </div>
   
