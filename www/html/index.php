@@ -29,14 +29,13 @@ if( ($page = get_get('page')) === ''){
 }
 // 結果の行数を取得
 $number_of_results = get_items_count($db);
-$results_per_page = 8;
 // ページ数を計算（端数切り上げ）
-$number_f_pages = ceil($number_of_results[0]['count']/$results_per_page);
- // ページ数に応じてLIMITに設定
-$this_page_first_result = ($page-1) * $results_per_page;
+$number_of_pages = ceil($number_of_results[0]['count']/RESULTS_PAGE);
+ // $_GET['page']に合わせて、始まりの個数を求める
+$this_page_first_result = ($page-1) * RESULTS_PAGE;
 
 // 商品一覧用の商品データを取得
-$items = get_open_items($db,$sort,$this_page_first_result,$results_per_page);
+$items = get_open_items($db,$sort,$this_page_first_result,RESULTS_PAGE);
 
 // ビューの読み込み
 include_once VIEW_PATH . 'index_view.php';
