@@ -66,34 +66,30 @@
       <?php } ?>
       </div> 
     </div>
-      <nav class="navbar navbar-expand-sm">
-          <ul class="navbar-nav mr-auto">
+      <div class="container">
+          <ul class="row justify-content-center list-unstyled mt-3">
           <?php if ( (int)$page !== 1 ) : ?>
-            <li class="nav-item">
-              <a class="nav-link" href="index.php?page=<?php echo h($page - 1); ?> ">前へ</a>
-            </li>
+            <li class="nav-link"><a href="index.php?page=<?php echo h($page - 1); ?> ">前へ</a></li>
           <?php endif; ?>
           <?php for ( $i=1; $i <= $number_of_pages; $i++) : ?>
-            <li class="nav-item">
+            <li class="p-1">
              <a class="btn btn-secondary btn-block" href="index.php?page=<?php echo h($i); ?> "><?php echo h($i); ?></a>
             </li>
           <?php endfor; ?>
           <?php if ( (int)$page < $number_of_pages) : ?>
-            <li class="nav-item">
-             <a class="nav-link" href="index.php?page=<?php echo h($page + 1); ?> ">次へ</a>
-            </li>
+            <li class="nav-link"><a href="index.php?page=<?php echo h($page + 1); ?> ">次へ</a></li>
           <?php endif; ?>
           <?php if ( ($this_page_first_result + 1 + RESULTS_PAGE) <= $number_of_results[0]['count']) { ?>
-            <div class="nav-item">
-             <div class="nav-link"><?php echo h( $number_of_results[0]['count'] .'件中' . ($this_page_first_result + 1) . '-' .  ($this_page_first_result + RESULTS_PAGE) . '件目の商品' ); ?></div>
+            <div class="nav-link">
+             <div><?php echo h( $number_of_results[0]['count'] .'件中' . ($this_page_first_result + 1) . '-' .  ($this_page_first_result + RESULTS_PAGE) . '件目の商品' ); ?></div>
             </div>
           <?php } else { ?>
-            <div class="nav-item">
-            <div class="nav-link"><?php echo h( $number_of_results[0]['count'] .'件中' . ($this_page_first_result + 1) . '-' .  $number_of_results[0]['count'] . '件目の商品' ); ?></div>
+            <div class="nav-link">
+            <div><?php echo h( $number_of_results[0]['count'] .'件中' . ($this_page_first_result + 1) . '-' .  $number_of_results[0]['count'] . '件目の商品' ); ?></div>
             </div>
           <?php } ?>
         </ul>
-      </nav>
+    </div>
 
      </div>
   </div>
