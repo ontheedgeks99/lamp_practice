@@ -67,18 +67,30 @@
       </div> 
     </div>
       <div class="container">
-          <ul class="row justify-content-center list-unstyled mt-3">
-          <?php if ( (int)$page !== 1 ) : ?>
-            <li class="nav-link"><a href="index.php?page=<?php echo h($page - 1); ?> ">前へ</a></li>
-          <?php endif; ?>
+       <div class="row">
+        <div class="col-12 m-2">
+          <ul class="pagination justify-content-center">
+          <?php if ( (int)$page !== 1 ) { ?>
+            <li class="page-item"><a class="page-link" href="index.php?page=<?php echo h($page - 1); ?> ">前へ</a></li>
+          <?php } else { ?>
+            <li class="page-item disabled"><a class="page-link" href="index.php?page=<?php echo h($page - 1); ?> ">前へ</a></li>
+          <?php } ?>
           <?php for ( $i=1; $i <= $number_of_pages; $i++) : ?>
-            <li class="p-1">
-             <a class="btn btn-secondary btn-block" href="index.php?page=<?php echo h($i); ?> "><?php echo h($i); ?></a>
+            <?php if($i === (int)$page) { ?>
+              <li class="page-item active">
+              <a class="page-link" href="index.php?page=<?php echo h($i); ?> "><?php echo h($i); ?></a>
+             </li>
+            <?php } else { ?>
+            <li class="page-item">
+             <a class="page-link" href="index.php?page=<?php echo h($i); ?> "><?php echo h($i); ?></a>
             </li>
+            <?php } ?>
           <?php endfor; ?>
-          <?php if ( (int)$page < $number_of_pages) : ?>
-            <li class="nav-link"><a href="index.php?page=<?php echo h($page + 1); ?> ">次へ</a></li>
-          <?php endif; ?>
+          <?php if ( (int)$page < $number_of_pages) { ?>
+            <li class="page-item"><a class="page-link" href="index.php?page=<?php echo h($page + 1); ?> ">次へ</a></li>
+          <?php } else { ?>
+            <li class="page-item disabled"><a class="page-link" href="index.php?page=<?php echo h($page + 1); ?> ">次へ</a></li>
+          <?php } ?>
           <?php if ( ($this_page_first_result + 1 + RESULTS_PAGE) <= $number_of_results[0]['count']) { ?>
             <div class="nav-link">
              <div><?php echo h( $number_of_results[0]['count'] .'件中' . ($this_page_first_result + 1) . '-' .  ($this_page_first_result + RESULTS_PAGE) . '件目の商品' ); ?></div>
@@ -89,6 +101,8 @@
             </div>
           <?php } ?>
         </ul>
+        </div>
+        </div>
     </div>
 
      </div>
