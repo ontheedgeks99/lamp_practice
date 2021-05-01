@@ -37,7 +37,7 @@ function get_items($db, $is_open = false, $sort = 0, $start = '', $get = ''){
   $sql = '
     SELECT
       item_id, 
-      name,
+      name,19
       stock,
       price,
       image,
@@ -66,8 +66,10 @@ function get_items($db, $is_open = false, $sort = 0, $start = '', $get = ''){
   }
   if ($start !== '' && $get !== ''){
   $sql .= "
-      LIMIT $start,$get
+      LIMIT ?,?
     ";
+
+    return fetch_all_query($db, $sql, array($start, $get));
   }
 
   return fetch_all_query($db, $sql);
