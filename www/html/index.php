@@ -7,6 +7,8 @@ require_once MODEL_PATH . 'functions.php';
 require_once MODEL_PATH . 'user.php';
 // itemデータに関する関数ファイルを読み込み
 require_once MODEL_PATH . 'item.php';
+// 注文データに関する関数ファイルの読み込み
+require_once MODEL_PATH . 'order.php';
 
 // ログインチェックを行うため、sessionを開始する
 session_start();
@@ -36,6 +38,9 @@ $this_page_first_result = ($page-1) * RESULTS_PAGE;
 
 // 商品一覧用の商品データを取得
 $items = get_open_items($db,$sort,$this_page_first_result,RESULTS_PAGE);
+
+// ランキングデータを取得
+$ranking = get_ranking($db);
 
 // ビューの読み込み
 include_once VIEW_PATH . 'index_view.php';

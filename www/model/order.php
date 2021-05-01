@@ -108,3 +108,34 @@ function get_order_details($db, $order_id){
   ";
   return fetch_all_query($db, $sql, array($order_id));
 }
+/**
+ * クエリを実行し、商品IDごとの注文数を集計し、上位3つを返す
+ * @param obj $db dbハンドル
+ * @return array|bool item情報|false
+ */
+function get_ranking($db) {
+  $sql = "
+  SELECT
+    details.item_id, 
+    SUM(details.amount) AS total,
+    items.item_id,
+    items.name,
+    items.image,
+    items.price,
+    items.stock
+  FROM
+    details
+  JOIN
+    items
+  ON
+    details.item_id = items.item_id
+  GROUP BY
+    details.item_id 
+  ORDER BY
+    total desc
+  LIMIT
+    3
+  ";
+
+  return fetch_all_query($db,$sql);
+}
