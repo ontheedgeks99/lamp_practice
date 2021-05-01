@@ -37,7 +37,7 @@ function get_items($db, $is_open = false, $sort = 0, $start = '', $get = ''){
   $sql = '
     SELECT
       item_id, 
-      name,19
+      name,
       stock,
       price,
       image,
