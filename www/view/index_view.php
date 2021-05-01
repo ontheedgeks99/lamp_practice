@@ -108,11 +108,11 @@
     <h1>人気ランキング</h1>
     <div class="card-deck">
       <div class="row">
-      <?php foreach($ranking as $item){ ?>
+      <?php foreach($ranking as $key=>$item){ ?>
         <div class="col-4 item">
           <div class="card h-100 text-center">
             <div class="card-header">
-              <span class="badge badge-warning ">第<?php print(h($ranking_count += 1));?>位</span>
+              <span class="badge badge-warning ">第<?php print(h($key + 1));?>位</span>
               <?php print(h($item['name'])); ?>
             </div>
             <figure class="card-body">
